@@ -6,6 +6,15 @@ public class Brick : MonoBehaviour
 {
 	[SerializeField] private DifferentBricks diffBrick;
 
+	private Dictionary<DifferentBricks, Color> differentColoredBricks;
+	private Dictionary<DifferentBricks, DifferentBricks> changeBricks;
+	private Renderer ren;
+
+	private void Awake()
+	{
+		ren = GetComponent<Renderer>();
+	}
+
 	private void Update()
 	{
 		BrickStates();
@@ -16,16 +25,16 @@ public class Brick : MonoBehaviour
 		switch (diffBrick)
 		{
 			case DifferentBricks.Red:
-				gameObject.GetComponent<Renderer>().material.color = Color.red;
+				ren.material.color = Color.red;
 				break;
 			case DifferentBricks.Orange:
-				gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+				ren.material.color = Color.yellow;
 				break;
 			case DifferentBricks.Green:
-				gameObject.GetComponent<Renderer>().material.color = Color.green;
+				ren.material.color = Color.green;
 				break;
 			case DifferentBricks.Silver:
-				gameObject.GetComponent<Renderer>().material.color = Color.gray;
+				ren.material.color = Color.gray;
 				break;
 		}
 	}
@@ -50,8 +59,14 @@ public class Brick : MonoBehaviour
 			}
 			if (diffBrick == DifferentBricks.Red)
 			{
-				Destroy(gameObject);
+				DestroyBrick();
 			}
+			
 		}
+	}
+
+	private void DestroyBrick()
+	{
+		Destroy(gameObject);
 	}
 }
