@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IReset
 {
-	[SerializeField] private float speed = 10f;
+	public Vector3 ResetPosition { get { return startPosition; } set { startPosition = value; } }
 
+	[SerializeField] private float speed = 10f;
+	private Vector3 startPosition;
 	private Rigidbody rb;
 
 	private void Awake()
-    {
+	{
 		rb = GetComponent<Rigidbody>();
-		//rb.velocity = Vector2.up * speed;
+	}
+
+	public void ResetBall()
+	{
+		rb.angularVelocity = Vector3.zero;
+		rb.velocity = Vector3.zero;
+		transform.position = startPosition;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.tag == Tags.Paddle)
+		if (collision.gameObject.tag == Tags.Paddle)
 		{
 			float _x = UtilityMath.HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
 
