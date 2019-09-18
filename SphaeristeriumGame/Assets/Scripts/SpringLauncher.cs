@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// SpringLauncher class, Pulls the plunger down an fires it back up with force and applies it to the ball.
+/// </summary>
 public class SpringLauncher : MonoBehaviour
 {
 	[Header("Amount of Velocity/Power:")]
@@ -36,7 +37,7 @@ public class SpringLauncher : MonoBehaviour
 		if (!isResetting && isActive && Input.GetKey(KeyCode.Space) && Mathf.Abs(gameObject.transform.position.y - startPos.y) < 1f)
 		{
 			isResetting = false;
-			pullBackAmount = new Vector3(0f, -pullSpeed * Time.deltaTime, 0f);
+			pullBackAmount = new Vector3(0f, 0f, pullSpeed * Time.deltaTime);
 			gameObject.transform.Translate(pullBackAmount);
 		}
 
@@ -52,7 +53,7 @@ public class SpringLauncher : MonoBehaviour
 		{
 			if (gameObject.transform.position.y < startPos.y)
 			{
-				Vector3 _moveToStartPos = new Vector3(0f, resetSpeed * Time.deltaTime, 0f);
+				Vector3 _moveToStartPos = new Vector3(0f, 0f, -resetSpeed * Time.deltaTime);
 				gameObject.transform.Translate(_moveToStartPos);
 			}
 			else
