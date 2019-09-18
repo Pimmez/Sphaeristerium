@@ -15,7 +15,7 @@ public class ResetZone : MonoBehaviour
 			if (iReset != null)
 			{
 				iReset.ResetPosition = startPosition;
-				iReset.ResetBall();
+				iReset.ResetObject();
 			}
 		}
 	}
